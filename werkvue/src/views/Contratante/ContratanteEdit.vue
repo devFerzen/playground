@@ -5,6 +5,7 @@
         <h1 class="contratante-edit-title">EDITA TU PERFIL</h1>
       </div>
     </div>
+    <!--El famoso header -->
     <b-container fluid="md" align="left" class="contratante-edit-content" style="padding-bottom:20px; padding-top: 50px; overflow:hidden;">
       <b-form id="contratanteData">
         <div class="perfil-descripcion contratante-edit-seccion">
@@ -19,7 +20,7 @@
           </b-row>
         </div>
         <!--perfil-descripcion-->
-        
+
         <div class="informacion-personal contratante-edit-seccion float-lg-left">
           <h5 align="left" style="font-weight:900; color:black; margin-bottom: 28px;">INFORMACIÓN PERSONAL</h5>
           <b-row no-gutters>
