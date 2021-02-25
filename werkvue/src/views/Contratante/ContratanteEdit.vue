@@ -7,6 +7,7 @@
     </div>
 
     <!--El famoso header -->
+    <!-- hahahaha -->
     <!--SE VA A ELIMINAR-->
 
     <b-container fluid="md" align="left" class="contratante-edit-content" style="padding-bottom:20px; padding-top: 50px; overflow:hidden;">
