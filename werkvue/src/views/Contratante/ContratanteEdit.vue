@@ -5,6 +5,10 @@
         <h1 class="contratante-edit-title">EDITA TU PERFIL</h1>
       </div>
     </div>
+
+    <!--El famoso header -->
+    <!--SE VA A ELIMINAR-->
+
     <b-container fluid="md" align="left" class="contratante-edit-content" style="padding-bottom:20px; padding-top: 50px; overflow:hidden;">
       <b-form id="contratanteData">
         <div class="perfil-descripcion contratante-edit-seccion">
