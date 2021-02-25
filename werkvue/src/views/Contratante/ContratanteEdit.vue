@@ -2,7 +2,7 @@
   <div>
     <div id="contratante-edit" class="blue-circle-background">
       <div class="blue-circle-content">
-        <h1 class="contratante-edit-title">EDITA TU PERFIL</h1>
+        <h1 class="contratante-edit-title">EDITA TU PERFIL HAHAHAH</h1>
       </div>
     </div>
     <!--El famoso header -->
