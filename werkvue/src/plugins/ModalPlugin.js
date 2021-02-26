@@ -13,13 +13,13 @@ const ModalBus = {
 
     Vue.prototype.$GlobalModal = {
       modalIS(params){
-        ModalBus.EventBus.$emit('modalIS',params)
+        ModalBus.EventBus.$emit('modalIS', params)
       },
       modalDF(params){
-        ModalBus.EventBus.$emit('modalDF',params)
+        ModalBus.EventBus.$emit('modalDF', params)
       },
       modalRP(params){
-        ModalBus.EventBus.$emit('modalRP',params)
+        ModalBus.EventBus.$emit('modalRP', params)
       }
     }
   }

@@ -1,31 +1,183 @@
 <template>
-<b-container fluid="md" align="left" class="anuncio" style="margin-bottom:20px;">
-  <b-row cols="2">
-    <b-col cols="8" md="12">
-    </b-col>
+  <b-container fluid="md" align="left" class="anuncio" style="margin-bottom:20px;">
+    <b-row cols="2">
+      <b-col cols="8" md="12">
+      </b-col>
 
-    <b-col cols="4" md="3" offset-md="3" order-md="3" align-self="baseline" class="mt-0 mt-md-5" style="display: flex; justify-content: flex-end;">
-      <like-star-share></like-star-share>
-    </b-col>
+      <b-col cols="4" md="3" offset-md="3" order-md="3" align-self="baseline" class="mt-0 mt-md-5" style="display: flex; justify-content: flex-end;">
+        <like-star-share></like-star-share>
+      </b-col>
 
-    <b-col cols="12" md="6" class="mt-5">
-      <h1 class="anuncio-title">{{objetoWerkData.titulo}}</h1>
-    </b-col>
-  </b-row> <!--title-and-like-component-->
+      <b-col cols="12" md="6" class="mt-5">
+        <h1 class="anuncio-title">{{objetoWerkData.titulo}}</h1>
+      </b-col>
+    </b-row> <!--title-and-like-component-->
 
-  <b-row style="margin-bottom: 50px;">
-    <b-col cols="12" md="6" class="mx-auto pl-0">
-      <div class="anuncio-sobre mt-4">
-        <h5 class="mb-4">SOBRE EL PROYECTO</h5>
-        <p class="mb-4"> {{objetoWerkData.descripcion}} </p>
-      </div>
+    <b-row style="margin-bottom: 50px;">
+      <b-col cols="12" md="6" class="mx-auto pl-0">
+        <div class="anuncio-sobre mt-4">
+          <h5 class="mb-4">SOBRE EL PROYECTO</h5>
+          <p class="mb-4"> {{objetoWerkData.descripcion}} </p>
+        </div>
 
-      <div class="anuncio-especialidades-mv mt-4" v-if="objetoWerkData.areasDeEspecialidad">
-        <h5 class="mb-4">ÁREAS DE ESPECIALIDAD</h5>
-        <p class="mb-0" v-for=" (area, index) in objetoWerkData.areasDeEspecialidad" :key="index">- {{area}}. </p>
-      </div>
+        <div class="anuncio-especialidades-mv mt-4" v-if="objetoWerkData.areasDeEspecialidad">
+          <h5 class="mb-4">ÁREAS DE ESPECIALIDAD</h5>
+          <p class="mb-0" v-for=" (area, index) in objetoWerkData.areasDeEspecialidad" :key="index">- {{area}}. </p>
+        </div>
 
-      <div class="anuncio-banda-costo-mv  mt-4">
+        <div class="anuncio-banda-costo-mv  mt-4">
+          <h5>BANDA DE COSTOS</h5>
+          <div class="base-band werk-header-shadow">
+            <div class="highlight-band">
+            </div>
+            <div class="min-base-band base-band-price">
+              {{minBand}}<sup>00</sup>
+            </div>
+            <div class="max-base-band base-band-price">
+              {{maxBand}}<sup>00</sup>
+            </div>
+            <div class="min-highlight-band highlight-band-price">
+              {{objetoWerkData.costo.min}}<sup>00</sup>
+            </div>
+            <div class="max-highlight-band highlight-band-price">
+              {{objetoWerkData.costo.max}}<sup>00</sup>
+            </div>
+          </div>
+        </div>
+
+        <div class="anuncio-tags-mv mt-4">
+          <h5 class="mb-4">TAGS</h5>
+          <b-badge class="werk-tags" v-for="(tag, index) in objetoWerkData.tags" :key="index">
+            {{tag.nombre}}
+          </b-badge>
+        </div>
+
+        <div class="anuncio-card-mv mt-4">
+          <h5 class="mb-4">SOBRE EL werk..er</h5>
+          <div class="tarjeta-werk mt-4 werk-shadow-card">
+            <b-row class="tarjeta-werk-body" no-gutters>
+              <b-col md="10" lg="7">
+                <div class="tw-nombre-werker">
+                  <b-row no-gutters>
+                    <b-col sm="4" xl="3">
+                      <b-img fluid width="65px" height="65px" block class="tw-image-werker" src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/109611151/original/a50b46024fc91f3fff823effaa582c3cbb0b9781/design-3-professional-logo-for-you-in-24-hours.jpg" alt="Portfolio-img"></b-img>
+                    </b-col>
+
+                    <b-col class="tw-nombres-werker">
+                      <p>{{objetoWerkData.werker.nombre.nombres}}</p>
+                      <p>{{objetoWerkData.werker.nombre.apellidos}}</p>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-col>
+              <b-col md="12" lg="5">
+                <div class="tarjeta-werk-social">
+                  <like-star-share></like-star-share>
+                </div>
+              </b-col>
+              <b-col lg="12" xl="6">
+                <div class="tw-info-werker">
+                  <b-row>
+                    <b-col cols="6">
+                      <b class="w-100 tw-sub-title">País</b>
+                      <p class="w-100 tw-p-content">{{objetoWerkData.werker.ubicacion.pais}}</p>
+                    </b-col>
+
+                    <b-col>
+                      <b class="w-100 tw-sub-title">Estado</b>
+                      <p class="w-100 tw-p-content">{{objetoWerkData.werker.ubicacion.estado}}</p>
+                    </b-col>
+                  </b-row>
+
+                  <b-row>
+                    <b-col cols="6">
+                      <b class="w-100 tw-sub-title">Genera factura</b>
+                      <p class="w-100 tw-p-content">{{objetoWerkData.werker.ubicacion.factura = true ? 'Sí':'No'}}</p>
+                    </b-col>
+
+                  </b-row>
+
+                  <b-row align-h="center">
+                    <b-button pill class="ver-perfil shadow-none" variant="primary">VER PERFIL</b-button>
+                  </b-row>
+                </div>
+              </b-col>
+              <b-col lg="12" xl="6">
+                <b-row class="ml-0 mr-0">
+                  <b-col cols="12" class="tw-contactame-card werk-shadow-card">
+                    <b-row class="ml-0">
+                      <p class="w-100 tw-contactame-titulo">CONTÁCTAME</p>
+                    </b-row>
+                    <b-row class="ml-0">
+                      <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="phone-alt" class="tw-contactame-icons"/><span>{{objetoWerkData.contacto.telefonos.fijo}}</span></p>
+                    </b-row>
+                    <b-row class="ml-0">
+                      <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="envelope" class="tw-contactame-icons"/><span>{{objetoWerkData.contacto.correo}}</span></p>
+                    </b-row>
+                    <b-row class="ml-0">
+                      <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="globe" class="tw-contactame-icons" style="transform: rotate(22deg);"/><span>{{objetoWerkData.contacto.telefonos.fijo}}</span></p>
+                    </b-row>
+                    <b-row no-gutters class="tw-row-redes" align-h="center">
+                      <b-col v-for="(redSocial, index) in objetoWerkData.contacto.redes_sociales" :key="index">
+                          <div class="tw-redes-box">
+                            <font-awesome-icon :icon="['fab', redSocial.red]" class="tw-redes-icons" />
+                          </div>
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                </b-row><!--tw-contactame-card-->
+              </b-col>
+            </b-row>
+          </div>
+
+        </div>
+      </b-col>
+
+      <b-col cols="12" md="6" class="mx-auto pr-0">
+        <div class="carrusel mt-4" style="width:auto">
+            <b-carousel
+              id="anuncioCarrusel"
+              class="werk-smart-outline"
+              v-model="slide" :interval="4000"
+              controls indicators fade background="#ababab"
+              no-touch = "true"
+              img-width="1024" img-height="480"
+              style="text-shadow: 1px 1px 2px #333;"
+              @sliding-start="onSlideStart"
+              @sliding-end="onSlideEnd"
+            >
+              <b-carousel-slide>
+                <template #img>
+                  <img
+                    class="d-block img-fluid w-100"
+                    width="1024" height="480"
+                    src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/dbf97f33b86612a917fdd960d945bd95-1591613231/A%2079761%20JPL%20(12)/design-vintage-retro-logo-in-24-hours.jpg"
+                    alt="image slot">
+                </template>
+              </b-carousel-slide>
+
+              <b-carousel-slide>
+                <template #img>
+                  <img
+                    class="d-block img-fluid w-100"
+                    width="1024" height="480"
+                    src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/5b9833a6d8e84542afd5848c7e0adf5e-1593068164/1_/design-vintage-retro-logo-in-24-hours.jpg" alt="image slot">
+                </template>
+              </b-carousel-slide>
+            </b-carousel>
+        </div>
+
+        <div class="portafolios mt-4">
+          <div class="anuncio-portafolios-dv">
+            <h5 class="mb-4">PORTAFOLIOS</h5>
+            <PortafolioCard></PortafolioCard>
+            <PortafolioCard></PortafolioCard>
+            <PortafolioCard></PortafolioCard>
+          </div>
+        </div>
+      </b-col> <!--carrusel-portafolios-->
+
+      <b-col  cols="12" md="6" class="anuncio-banda-costo-dv">
         <h5>BANDA DE COSTOS</h5>
         <div class="base-band werk-header-shadow">
           <div class="highlight-band">
@@ -43,39 +195,38 @@
             {{objetoWerkData.costo.max}}<sup>00</sup>
           </div>
         </div>
-      </div>
+      </b-col>
 
-      <div class="anuncio-tags-mv mt-4">
+      <b-col  cols="12" md="6" class="anuncio-portafolios-mv mt-4" >
+        <h5 class="mb-4">PORTAFOLIOS</h5>
+        <PortafolioCard></PortafolioCard>
+        <PortafolioCard></PortafolioCard>
+        <PortafolioCard></PortafolioCard>
+      </b-col>
+
+      <b-col  cols="12" class="anuncio-tags-dv mt-4">
         <h5 class="mb-4">TAGS</h5>
         <b-badge class="werk-tags" v-for="(tag, index) in objetoWerkData.tags" :key="index">
           {{tag.nombre}}
         </b-badge>
-      </div>
+      </b-col>
 
-      <div class="anuncio-card-mv mt-4">
-        <h5 class="mb-4">SOBRE EL werk..er</h5>
+      <b-col cols="12" class="anuncio-card-dv mt-4">
+        <h5 class="mb-4">SOBRE EL werke..er</h5>
         <div class="tarjeta-werk mt-4 werk-shadow-card">
           <b-row class="tarjeta-werk-body" no-gutters>
-            <b-col md="10" lg="7">
+            <b-col cols="6">
               <div class="tw-nombre-werker">
                 <b-row no-gutters>
-                  <b-col sm="4" xl="3">
+                  <b-col cols="4">
                     <b-img fluid width="65px" height="65px" block class="tw-image-werker" src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/109611151/original/a50b46024fc91f3fff823effaa582c3cbb0b9781/design-3-professional-logo-for-you-in-24-hours.jpg" alt="Portfolio-img"></b-img>
                   </b-col>
-
                   <b-col class="tw-nombres-werker">
                     <p>{{objetoWerkData.werker.nombre.nombres}}</p>
                     <p>{{objetoWerkData.werker.nombre.apellidos}}</p>
                   </b-col>
                 </b-row>
               </div>
-            </b-col>
-            <b-col md="12" lg="5">
-              <div class="tarjeta-werk-social">
-                <like-star-share></like-star-share>
-              </div>
-            </b-col>
-            <b-col lg="12" xl="6">
               <div class="tw-info-werker">
                 <b-row>
                   <b-col cols="6">
@@ -102,7 +253,14 @@
                 </b-row>
               </div>
             </b-col>
-            <b-col lg="12" xl="6">
+
+            <b-col cols="6">
+              <b-row align-h="center">
+                <b-col cols="4">
+                  <like-star-share></like-star-share>
+                </b-col>
+              </b-row><!--like-star-share-->
+
               <b-row class="ml-0 mr-0">
                 <b-col cols="12" class="tw-contactame-card werk-shadow-card">
                   <b-row class="ml-0">
@@ -115,9 +273,9 @@
                     <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="envelope" class="tw-contactame-icons"/><span>{{objetoWerkData.contacto.correo}}</span></p>
                   </b-row>
                   <b-row class="ml-0">
-                    <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="globe" class="tw-contactame-icons" style="transform: rotate(22deg);"/><span>{{objetoWerkData.contacto.telefonos.fijo}}</span></p>
+                    <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="globe" class="tw-contactame-icons" style="transform: rotate(22deg);"/><span>{{objetoWerkData.contacto.url}}</span></p>
                   </b-row>
-                  <b-row no-gutters class="tw-row-redes" align-h="center">
+                  <b-row no-gutters align-h="center" class="tw-redes">
                     <b-col v-for="(redSocial, index) in objetoWerkData.contacto.redes_sociales" :key="index">
                         <div class="tw-redes-box">
                           <font-awesome-icon :icon="['fab', redSocial.red]" class="tw-redes-icons" />
@@ -129,169 +287,9 @@
             </b-col>
           </b-row>
         </div>
-
-      </div>
-    </b-col>
-
-    <b-col cols="12" md="6" class="mx-auto pr-0">
-      <div class="carrusel mt-4" style="width:auto">
-          <b-carousel
-            id="anuncioCarrusel"
-            class="werk-smart-outline"
-            v-model="slide" :interval="4000"
-            controls indicators fade background="#ababab"
-            no-touch = "true"
-            img-width="1024" img-height="480"
-            style="text-shadow: 1px 1px 2px #333;"
-            @sliding-start="onSlideStart"
-            @sliding-end="onSlideEnd"
-          >
-            <b-carousel-slide>
-              <template #img>
-                <img
-                  class="d-block img-fluid w-100"
-                  width="1024" height="480"
-                  src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/dbf97f33b86612a917fdd960d945bd95-1591613231/A%2079761%20JPL%20(12)/design-vintage-retro-logo-in-24-hours.jpg"
-                  alt="image slot">
-              </template>
-            </b-carousel-slide>
-
-            <b-carousel-slide>
-              <template #img>
-                <img
-                  class="d-block img-fluid w-100"
-                  width="1024" height="480"
-                  src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/attachments/delivery/asset/5b9833a6d8e84542afd5848c7e0adf5e-1593068164/1_/design-vintage-retro-logo-in-24-hours.jpg" alt="image slot">
-              </template>
-            </b-carousel-slide>
-          </b-carousel>
-      </div>
-
-      <div class="portafolios mt-4">
-        <div class="anuncio-portafolios-dv">
-          <h5 class="mb-4">PORTAFOLIOS</h5>
-          <PortafolioCard></PortafolioCard>
-          <PortafolioCard></PortafolioCard>
-          <PortafolioCard></PortafolioCard>
-        </div>
-      </div>
-    </b-col> <!--carrusel-portafolios-->
-
-    <b-col  cols="12" md="6" class="anuncio-banda-costo-dv">
-      <h5>BANDA DE COSTOS</h5>
-      <div class="base-band werk-header-shadow">
-        <div class="highlight-band">
-        </div>
-        <div class="min-base-band base-band-price">
-          {{minBand}}<sup>00</sup>
-        </div>
-        <div class="max-base-band base-band-price">
-          {{maxBand}}<sup>00</sup>
-        </div>
-        <div class="min-highlight-band highlight-band-price">
-          {{objetoWerkData.costo.min}}<sup>00</sup>
-        </div>
-        <div class="max-highlight-band highlight-band-price">
-          {{objetoWerkData.costo.max}}<sup>00</sup>
-        </div>
-      </div>
-    </b-col>
-
-    <b-col  cols="12" md="6" class="anuncio-portafolios-mv mt-4" >
-      <h5 class="mb-4">PORTAFOLIOS</h5>
-      <PortafolioCard></PortafolioCard>
-      <PortafolioCard></PortafolioCard>
-      <PortafolioCard></PortafolioCard>
-    </b-col>
-
-    <b-col  cols="12" class="anuncio-tags-dv mt-4">
-      <h5 class="mb-4">TAGS</h5>
-      <b-badge class="werk-tags" v-for="(tag, index) in objetoWerkData.tags" :key="index">
-        {{tag.nombre}}
-      </b-badge>
-    </b-col>
-
-    <b-col cols="12" class="anuncio-card-dv mt-4">
-      <h5 class="mb-4">SOBRE EL werke..er</h5>
-      <div class="tarjeta-werk mt-4 werk-shadow-card">
-        <b-row class="tarjeta-werk-body" no-gutters>
-          <b-col cols="6">
-            <div class="tw-nombre-werker">
-              <b-row no-gutters>
-                <b-col cols="4">
-                  <b-img fluid width="65px" height="65px" block class="tw-image-werker" src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/109611151/original/a50b46024fc91f3fff823effaa582c3cbb0b9781/design-3-professional-logo-for-you-in-24-hours.jpg" alt="Portfolio-img"></b-img>
-                </b-col>
-                <b-col class="tw-nombres-werker">
-                  <p>{{objetoWerkData.werker.nombre.nombres}}</p>
-                  <p>{{objetoWerkData.werker.nombre.apellidos}}</p>
-                </b-col>
-              </b-row>
-            </div>
-            <div class="tw-info-werker">
-              <b-row>
-                <b-col cols="6">
-                  <b class="w-100 tw-sub-title">País</b>
-                  <p class="w-100 tw-p-content">{{objetoWerkData.werker.ubicacion.pais}}</p>
-                </b-col>
-
-                <b-col>
-                  <b class="w-100 tw-sub-title">Estado</b>
-                  <p class="w-100 tw-p-content">{{objetoWerkData.werker.ubicacion.estado}}</p>
-                </b-col>
-              </b-row>
-
-              <b-row>
-                <b-col cols="6">
-                  <b class="w-100 tw-sub-title">Genera factura</b>
-                  <p class="w-100 tw-p-content">{{objetoWerkData.werker.ubicacion.factura = true ? 'Sí':'No'}}</p>
-                </b-col>
-
-              </b-row>
-
-              <b-row align-h="center">
-                <b-button pill class="ver-perfil shadow-none" variant="primary">VER PERFIL</b-button>
-              </b-row>
-            </div>
-          </b-col>
-
-          <b-col cols="6">
-            <b-row align-h="center">
-              <b-col cols="4">
-                <like-star-share></like-star-share>
-              </b-col>
-            </b-row><!--like-star-share-->
-
-            <b-row class="ml-0 mr-0">
-              <b-col cols="12" class="tw-contactame-card werk-shadow-card">
-                <b-row class="ml-0">
-                  <p class="w-100 tw-contactame-titulo">CONTÁCTAME</p>
-                </b-row>
-                <b-row class="ml-0">
-                  <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="phone-alt" class="tw-contactame-icons"/><span>{{objetoWerkData.contacto.telefonos.fijo}}</span></p>
-                </b-row>
-                <b-row class="ml-0">
-                  <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="envelope" class="tw-contactame-icons"/><span>{{objetoWerkData.contacto.correo}}</span></p>
-                </b-row>
-                <b-row class="ml-0">
-                  <p class="w-100 tw-contactame-titulo"><font-awesome-icon icon="globe" class="tw-contactame-icons" style="transform: rotate(22deg);"/><span>{{objetoWerkData.contacto.url}}</span></p>
-                </b-row>
-                <b-row no-gutters align-h="center" class="tw-redes">
-                  <b-col v-for="(redSocial, index) in objetoWerkData.contacto.redes_sociales" :key="index">
-                      <div class="tw-redes-box">
-                        <font-awesome-icon :icon="['fab', redSocial.red]" class="tw-redes-icons" />
-                      </div>
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row><!--tw-contactame-card-->
-          </b-col>
-        </b-row>
-      </div>
-    </b-col>
-  </b-row>
-
-
-</b-container>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <style>

@@ -124,10 +124,6 @@
     margin-top:30px!important;
   }
 
-  .werk-main-buttom:hover {
-
-  }
-
   .werk-main-buttom:active {
     background-color:#7ed89a!important;
     color: #15365f!important;
